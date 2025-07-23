@@ -119,7 +119,7 @@ Set up Android Studio as usual. Otherwise, if you are using other IDE,
 then install the packages `android-sdk`, `android-sdk-build-tools`,
 `android-sdk-platform-tools`, and `android-tools`.
 
-Once installed, set the environment variable `ANDROID_HOME` to point to
+Once installed, open bashrc or bash.profile & set the environment variable `ANDROID_HOME` to point to
 the location where the packages were installed, and update your `PATH`:
 
 ```bash
@@ -130,6 +130,7 @@ export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HO
 On some Linux systems, `ANDROID_HOME` may be `/opt/android-sdk`. On Windows,
 it may be `/Users/username/Library/Android/sdk`. Set it accordingly.
 
+For Linux users:
 Install Java JDK 8 in order to donwload the images from the upstream.
 Also, make sure to enable JDK 8 before running `sdkmanager` commands,
 because they seem to work only with this version. To enable it on
@@ -147,6 +148,10 @@ You can list the images with the following command:
 ```bash
 sdkmanager --list
 ```
+For Windows users:
+Install Java JDK 17(or the most updated version) in order to donwload the images from the upstream.
+Also, make sure to enable JDK 17 before running `sdkmanager` commands,
+because they seem to work only with this version.
 
 Select the SDK that fits your platform (`x86_64`, `arm64`, or other). Then
 install the image with the command:
@@ -159,7 +164,8 @@ Of course, replace `system-images;android-34;default;arm64-v8a` with
 the desired image name. This examples uses the default image for Android
 SDK 34 for the `x86_64` (intel CPU) platform.
 
-Then, create an emulator device:
+If you prefer to use your mobile device, you may skip the following step.
+Create an emulator device:
 
 ```bash
 avdmanager create avd -n myemulator -k 'system-images;android-34;default;x86_64'
@@ -183,6 +189,14 @@ Make sure to select "Development build" and disabled "Build with Expo Applicatio
 Note: When starting a development server, do NOT run: `npx expo start`
 
 ### Run the app
+For Windows
+Steps to run satsigner dev version:
+1.	Open Vscode or other IDE
+2.	Open Satsigner folder at C://Users/<user>/.../Github/satsigner(or /c/Users/<user>/.../Github/satsigner)
+3.	Open the Bash terminal
+5.	Run cd apps/mobile to switch the working directory to our mobile app
+6.	Run yarn to install the packages(yarn)
+7.	Run yarn android to launch development build for Android(yarn android --device)
 
 Make sure you are on the `mobile` folder
 
@@ -197,3 +211,17 @@ yarn android
 
 yarn ios
 ```
+
+Common problems troubleshooting:
+Remember to Click on the dropdown menu and select Bash on the terminal panel. If you encounter a "binary not found in PATH" problems
+
+Make sure you have installed the exact Java SDK version(in this case,its Java SDK 17)
+
+Open the bashrc or bash_profile file on the IDE(pseronally using VSCode) (C:\\Users\paul.bashrc)
+
+Type the following & save the file:
+#!/bin/bash
+export PATH="/c/Users/<user>/AppData/Local/Android/Sdk/platform-tools:$PATH"
+export PATH="/c/Program Files/Java/jdk-17/bin:$PATH"
+export ANDROID_HOME="/c/Users/<user>/AppData/Local/Android/Sdk"
+Remember to replace <user> with your actual user name
