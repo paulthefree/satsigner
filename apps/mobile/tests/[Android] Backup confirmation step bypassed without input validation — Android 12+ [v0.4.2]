@@ -1,0 +1,55 @@
+## 🐛 Bug Report
+
+**Severity:** 🔴 Critical  
+**Priority:** P0  
+**Platform:** Android 12+  
+**App Version:** v0.4.2  
+**Status:** 100% Reproducible  
+
+---
+
+## Summary
+The mnemonic backup confirmation step can be bypassed on Android without the user entering or validating their seed phrase. The app proceeds as if the backup was successfully confirmed — no error is thrown, no block is applied. Users are left with a false sense of security, believing their wallet is backed up when it is not.
+
+This is a **custody safety failure**, not a UX bug. A user who loses or resets their device without a valid backup will have **no recovery path** and will permanently lose access to funds.
+
+---
+
+## Environment
+
+| Field | Details |
+|---|---|
+| Device | [e.g. Samsung Galaxy S22] |
+| OS | Android 12+ |
+| App Version | v0.4.2 |
+| iOS affected? | ❌ No — iOS enforces validation correctly |
+| Network | Any |
+
+---
+
+## Steps to Reproduce
+
+1. Create a new wallet and proceed to the mnemonic backup screen
+2. **Do not write down / memorise the seed phrase** — skip or dismiss the prompt
+3. Proceed through the confirmation step without entering the words
+
+**Result:** App accepts the confirmation and advances to the main wallet screen  
+**Expected:** App should block progression and require correct seed phrase entry
+
+---
+
+## Attachments
+
+- 📹 Screen recording: [attached]
+- 📋 Logs: [attached if applicable]
+
+---
+
+## Impact
+
+A user who believes their wallet is backed up — but is not — faces **irreversible loss of funds** upon device loss, reset, or reinstall. This undermines the core self-custody promise of the product and represents a critical trust and safety risk.
+
+---
+
+## Labels
+`bug` `critical` `android` `security` `onboarding` `seed-phrase` `p0`
